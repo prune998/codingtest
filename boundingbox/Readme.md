@@ -1,5 +1,28 @@
 # Geo-coding test #
 
+Here are some coding test examples.
+
+1. Bounding Box definition
+2. Canada Cities test
+3. Parking slots in Quebec City test
+
+## Bounding Box ##
+
+A Bounding box is a square centered around a geolocated point with a specific side width. When you specify a point and a distance, the resulting bounding box will have a side of twice the distance. You can think it as a box that contains a circle having a radius of the provided distance.
+
+![Bounding Box](https://github.com/prune998/codingtest/raw/master/boundingbox/data/aplikate_eu_bbox_.png)
+
+Check OSM Wiki for more info : http://wiki.openstreetmap.org/wiki/Bounding_Box
+
+To calculate the bounding box, earth radius can be approximate to 6371.01 kilometers.
+Then you can approximate the angular distance in radians on a great circle to be : angular_distance = <distance> / <earth radius>
+
+We can approximate the coordinates as if we were on a perfect cartesian sphere, then compute the bottom-left and top-right points of the box. Please refer to http://janmatuschek.de/LatitudeLongitudeBoundingCoordinates for more informations.
+
+Note that you can test your result on the website http://aplikate.eu/bbox/ by providing a string with your coordinates as `<min_lat>,<min_lon>,<max_lat>,<max_lon>` (ex : 46.699007,-71.295438,46.734979,-71.242970)
+
+You can test using the Python example `bounding_box_example.py`
+
 ## Canada Cities ##
 
 This coding test requires to :
@@ -131,18 +154,3 @@ This coding test requires to :
     ]
 
     ```
-
-## Bounding Box ##
-
-A Bounding box is a square centered around a geolocated point with a specific side width. When you specify a point and a distance, the resulting bounding box will have a side of twice the distance.
-
-![Bounding Box](https://raw.githubusercontent.com/prune998/codingtest/master/data/aplikate_eu_bbox_.png)
-
-To calculate the bounding box, earth radius can be approximate to 6371.01 kilometers.
-Then you can approximate the angular distance in radians on a great circle to be : angular_distance = <distance> / <earth radius>
-
-We can approximate the coordinates as if we were on a perfect cartesian sphere, then compute the top-left and bottom-right points of the box. Please refer to http://janmatuschek.de/LatitudeLongitudeBoundingCoordinates for more informations.
-
-Note that you can test your result on the website http://aplikate.eu/bbox/ by providing a string with your coordinates as `<min_lat>,<min_lon>,<max_lat>,<max_lon>` (ex : 46.699007,-71.295438,46.734979,-71.242970)
-
-You can test using the Python example `bounding_box_example.py`
