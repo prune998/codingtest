@@ -6,7 +6,7 @@ Here are some coding test examples.
 2. Canada Cities test
 3. Parking slots in Quebec City test
 
-## Bounding Box ##
+## Bounding Box Definition ##
 
 A Bounding box is a square centered around a geolocated point with a specific side width. When you specify a point and a distance, the resulting bounding box will have a side of twice the distance. You can think it as a box that contains a circle having a radius of the provided distance.
 
@@ -61,13 +61,13 @@ This coding test requires to :
     ```
     Each city is represented by a `Point` (not a shape). Coordinates are described as `longitude` and `latitude` (or easting and northing)
 
-- create a HTTPS REST API on port 8080
+- create a HTTPS REST API on port 8443
   - have two API enpoint returning a valid json document and responding to :
       - a GET request `/id/<12345>` where <12345> is the cartodb_id
       it should return a JSON document including the `cartodb_id` requested, the `name`, the `polulation` and the point `coordinates` :
       ex :
       ```
-      curl -ks https://localhost:8080/id/744
+      curl -ks https://localhost:8443/id/744
 
       {"cartodb_id": 744,
        "name": "oriel",
@@ -81,7 +81,7 @@ This coding test requires to :
       It should return a json document containing a list of all the cities inside the bounding box.
       ex :
       ```
-      curl -ks https://localhost:8080/id/744?dist=10
+      curl -ks https://localhost:8443/id/744?dist=10
 
       [
       {"cartodb_id": 544,
@@ -100,7 +100,7 @@ This coding test requires to :
       Note that the example is using random data, not the real expected result.
 
 
-## Parking slots in Quebec City ##
+## Parking slots in Quebec City (not yet ready) ##
 This coding test requires to :
 
 - open a Geo JSON file located at `data/PARCOMETRE.GEOJSON`
@@ -121,13 +121,13 @@ This coding test requires to :
 
   GEOM will not be used. Use the `Point coordinate` instead.
 
-- create a HTTPS REST API on port 8080
+- create a HTTPS REST API on port 8443
 - have two API enpoint returning a valid json document like :
   - a GET request `/id/<12345>` where <12345> is the NO_BORNE
     it should return a JSON document including the NO_CIVIQ and NOM_TOPOG of the selected location
     ex :
     ```
-    curl -ks https://localhost:8080/id/2069
+    curl -ks https://localhost:8443/id/2069
     {ID: 2069,
      ADDRESS: "555 Rue Saint-Jean",
      "COORDINATE":[-71.2203932633083,46.809783445691]
@@ -139,7 +139,7 @@ This coding test requires to :
 
     ex :
     ```
-    curl -ks https://localhost:8080/id/2069?dist=200
+    curl -ks https://localhost:8443/id/2069?dist=200
 
     [
       {ID: 2069,
