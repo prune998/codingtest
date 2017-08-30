@@ -100,6 +100,60 @@ This coding test requires to :
       Note that the example is using random data, not the real expected result.
 
 
+### Testing ###
+#### City data #####
+```
+curl -ks https://localhost:8443/id/744
+
+{
+  "city": {
+    "cartodb_id": 744,
+    "coordinates": [
+      -80.643498,
+      43.069946
+    ],
+    "name": "Oriel",
+    "population": 2500
+  }
+}
+```
+
+#### Closest cities ####
+```
+curl -ks https://localhost:8443/id/744?dist=4
+{
+  "cities": {
+    "737": {
+      "cartodb_id": 737,
+      "coordinates": [
+        -80.598719,
+        43.064133
+      ],
+      "name": "Beaconsfield",
+      "population": 2500
+    },
+    "776": {
+      "cartodb_id": 776,
+      "coordinates": [
+        -80.682714,
+        43.098307
+      ],
+      "name": "Oxford Centre",
+      "population": 109
+    },
+    "778": {
+      "cartodb_id": 778,
+      "coordinates": [
+        -80.62027,
+        43.099452
+      ],
+      "name": "Vandecar",
+      "population": 2500
+    }
+  }
+}
+```
+
 ## Parking slots in Quebec City (not yet ready) ##
 This coding test requires to :
 
