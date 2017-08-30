@@ -9,7 +9,7 @@ Here are some coding test examples.
 
 A Bounding box is a square centered around a geolocated point with a specific side width. When you specify a point and a distance, the resulting bounding box will have a side of twice the distance. You can think it as a box that contains a circle having a radius of the provided distance.
 
-![Bounding Box](http://github.com/prune998/codingtest/raw/master/boundingbox/data/aplikate_eu_bbox_.png)
+![Bounding Box](https://github.com/prune998/codingtest/raw/master/boundingbox/data/aplikate_eu_bbox_.png)
 
 Check OSM Wiki for more info : http://wiki.openstreetmap.org/wiki/Bounding_Box
 
