@@ -4,13 +4,12 @@ Here are some coding test examples.
 
 1. Bounding Box definition
 2. Canada Cities test
-3. Parking slots in Quebec City test
 
 ## Bounding Box Definition ##
 
 A Bounding box is a square centered around a geolocated point with a specific side width. When you specify a point and a distance, the resulting bounding box will have a side of twice the distance. You can think it as a box that contains a circle having a radius of the provided distance.
 
-![Bounding Box](https://github.com/prune998/codingtest/raw/master/boundingbox/data/aplikate_eu_bbox_.png)
+![Bounding Box](http://github.com/prune998/codingtest/raw/master/boundingbox/data/aplikate_eu_bbox_.png)
 
 Check OSM Wiki for more info : http://wiki.openstreetmap.org/wiki/Bounding_Box
 
@@ -27,7 +26,8 @@ You can test using the Python example `bounding_box_example.py`
 
 This coding test requires to :
 
-- open a Geo JSON file located at `data/canada_cities.geojson`
+- You have to implement your own data structure to hold the data from the Geo JSON file located at `data/canada_cities.geojson`. Do not reload the data file on every request.
+
   The file is a GeoJson file compliant with the format described at http://geojson.org/
   It is structured as :
 
@@ -61,13 +61,13 @@ This coding test requires to :
     ```
     Each city is represented by a `Point` (not a shape). Coordinates are described as `longitude` and `latitude` (or easting and northing)
 
-- create a HTTPS REST API on port 8443
+- create a HTTP REST API on port 8000
   - have two API enpoint returning a valid json document and responding to :
       - a GET request `/id/<12345>` where <12345> is the cartodb_id
       it should return a JSON document including the `cartodb_id` requested, the `name`, the `polulation` and the point `coordinates` :
       ex :
       ```
-      curl -ks https://localhost:8443/id/744
+      curl -ks http://localhost:8000/id/744
 
       {"cartodb_id": 744,
        "name": "oriel",
@@ -81,7 +81,7 @@ This coding test requires to :
       It should return a json document containing a list of all the cities inside the bounding box.
       ex :
       ```
-      curl -ks https://localhost:8443/id/744?dist=10
+      curl -ks http://localhost:8000/id/744?dist=10
 
       [
       {"cartodb_id": 544,
@@ -105,7 +105,7 @@ This coding test requires to :
 Try to get information for city number 744 :
 
 ```
-curl -ks https://localhost:8443/id/744
+curl -ks http://localhost:8000/id/744
 
 {
   "city": {
@@ -124,7 +124,7 @@ curl -ks https://localhost:8443/id/744
 Find all the cities that are 4 kilometers away from Oriel (city number 744) :
 
 ```
-curl -ks https://localhost:8443/id/744?dist=4
+curl -ks http://localhost:8000/id/744?dist=4
 {
   "cities": {
     "737": {
