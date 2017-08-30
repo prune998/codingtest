@@ -102,6 +102,8 @@ This coding test requires to :
 
 ### Testing ###
 #### City data #####
+Try to get information for city number 744 :
+
 ```
 curl -ks https://localhost:8443/id/744
 
@@ -119,6 +121,8 @@ curl -ks https://localhost:8443/id/744
 ```
 
 #### Closest cities ####
+Find all the cities that are 4 kilometers away from Oriel (city number 744) :
+
 ```
 curl -ks https://localhost:8443/id/744?dist=4
 {
@@ -153,58 +157,3 @@ curl -ks https://localhost:8443/id/744?dist=4
   }
 }
 ```
-
-## Parking slots in Quebec City (not yet ready) ##
-This coding test requires to :
-
-- open a Geo JSON file located at `data/PARCOMETRE.GEOJSON`
-  Json file is structured as :
-  ```
-  Nom	Description	Type
-  ID	Identifiant de la borne de stationnement.	Entier
-  COTE_RUE	Coté par rapport au centre de chaussée où est le panneau de stationnement.	Réel
-  LECT_MET	Distance mesurée à partir du début du tronçon dans le sens des numéros d'immeuble.	Réel
-  DIRECTION	Coté du centre de chaussée ou de l'intersection dans le cas d'un terre-plein.	Texte
-  SEGMENT_RU	Identifiant du segment de voie publique.	Réel
-  NOM_TOPOG	Nom topographique (générique, liaison, spécifique, direction) du centre de chaussée.	Texte
-  NO_BORNE	Numéro de la borne de stationnement.	Texte
-  NO_CIVIQ	Numéro civique où la borne de stationnement est située.	Réel
-  ID_VOIE_PUB	Identifiant de la voie publique sur laquelle la borne de stationnement est située.	Réel
-  GEOM	Longitude et latitude de la borne de stationnement selon le standard WKT (Well-known text).	Texte
-  ```
-
-  GEOM will not be used. Use the `Point coordinate` instead.
-
-- create a HTTPS REST API on port 8443
-- have two API enpoint returning a valid json document like :
-  - a GET request `/id/<12345>` where <12345> is the NO_BORNE
-    it should return a JSON document including the NO_CIVIQ and NOM_TOPOG of the selected location
-    ex :
-    ```
-    curl -ks https://localhost:8443/id/2069
-    {ID: 2069,
-     ADDRESS: "555 Rue Saint-Jean",
-     "COORDINATE":[-71.2203932633083,46.809783445691]
-    }
-    ```
-	- a range search like GET /id/<1234>?dist=200 where :
-		- where <12345> is the NO_BORNE
-    - dist is the length of the side of a square bounding box around the selected ID in `meters`
-
-    ex :
-    ```
-    curl -ks https://localhost:8443/id/2069?dist=200
-
-    [
-      {ID: 2069,
-       ADDRESS: "555 Rue Saint-Jean",
-       "COORDINATE":[-71.2203932633083,46.809783445691]
-      },
-      {ID: 2066,
-       ADDRESS: "537 Rue Saint-Jean",
-       "COORDINATE":[-71.2206433390378,46.8096776479961]
-      },
-      ...
-    ]
-
-    ```
