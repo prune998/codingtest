@@ -61,7 +61,7 @@ This coding test requires you to implement a *Canadian Cities service* as detail
 - create an HTTP REST API on port 8000
   - have two API enpoints returning a valid json document and responding to:
       - a GET request `/id/<12345>` where <12345> is the cartodb_id
-      it should return a JSON document including the `cartodb_id` requested, the `name`, the `polulation` and the point `coordinates` :    
+      it should return a JSON document including the `cartodb_id` requested, the `name`, the `population` and the point `coordinates` :    
       ex : 
       <pre><code>curl -ks http://localhost:8000/id/744
       {"cartodb_id": 744,
