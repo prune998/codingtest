@@ -1,9 +1,6 @@
 # Geo-coding test #
 
-Here are some coding test examples.
-
-1. Bounding Box definition
-2. Canada Cities test
+This describes a coding test involving a little geogrpahical processing. You will need to service described under [the **Canadian Cities Service** section](#problem) below. Everything else is context you may or may not wish to use.
 
 ## Bounding Box Definition ##
 
@@ -22,11 +19,11 @@ Note that you can test your result on the website http://aplikate.eu/bbox/ by pr
 
 You can test using the Python example `bounding_box_example.py`
 
-## Canada Cities ##
+## <a name="problem"></a>The Canadian Cities Service
 
-This coding test requires to :
+This coding test requires you to implement a *Canadian Cities service* as detailed below.
 
-- You have to implement your own data structure to hold the data from the Geo JSON file located at `data/canada_cities.geojson`. Do not reload the data file on every request.
+- You have to implement your own data structures to hold the data from the Geo JSON file located at `data/canada_cities.geojson`. Hint: **Do not** reload the data file on every request. Think of issues of memory usage, scalability, and performance.
 
   The file is a GeoJson file compliant with the format described at http://geojson.org/
   It is structured as :
@@ -61,42 +58,48 @@ This coding test requires to :
     ```
     Each city is represented by a `Point` (not a shape). Coordinates are described as `longitude` and `latitude` (or easting and northing)
 
-- create a HTTP REST API on port 8000
-  - have two API enpoint returning a valid json document and responding to :
+- create an HTTP REST API on port 8000
+  - have two API enpoints returning a valid json document and responding to:
       - a GET request `/id/<12345>` where <12345> is the cartodb_id
-      it should return a JSON document including the `cartodb_id` requested, the `name`, the `polulation` and the point `coordinates` :
-      ex :
-      ```
-      curl -ks http://localhost:8000/id/744
-
+      it should return a JSON document including the `cartodb_id` requested, the `name`, the `population` and the point `coordinates` :    
+      ex : 
+      <pre><code>curl -ks http://localhost:8000/id/744
       {"cartodb_id": 744,
        "name": "oriel",
        "population": 2500,
        "coordinates": [-80.643498,43.069946]
-      }
-      ```
+      }</code></pre>
 
-      - a GET request `/id/<12345>?dist=10` where <12345> is a `city ID` and `dist` is the side of a square centered around the city  (definig a bounding box) expressed in Kilometers.
+      - a GET request `/id/<12345>?dist=10` where <12345> is a `cartodb ID` and `dist` is the side of a square centered around the city  (definig a bounding box) expressed in Kilometers.
 
       It should return a json document containing a list of all the cities inside the bounding box.
       ex :
-      ```
+      <pre><code>
       curl -ks http://localhost:8000/id/744?dist=10
-
-      [
-      {"cartodb_id": 544,
-       "name": "Domaine-Pacha",
-       "population": 29500,
-       "coordinates": [-80.643497,43.069947]
-      },
-      {"cartodb_id": 998,
-       "name": "Rhodena",
-       "population": 210,
-       "coordinates": [-80.643478,43.069947]
-      },
-      ...
-      ]
-      ```
+      {
+		  "cities": {
+		    "737": {
+		      "cartodb\_id": 737,
+		      "coordinates": [
+		        -80.598719,
+		        43.064133
+		      ],
+		      "name": "Beaconsfield",
+		      "population": 2500
+		    },
+		    "776": {
+		      "cartodb\_id": 776,
+		      "coordinates": [
+		        -80.682714,
+		        43.098307
+		      ],
+		      "name": "Oxford Centre",
+		      "population": 109
+		    },
+		    ...
+		  }
+		}
+      </code></pre>
       Note that the example is using random data, not the real expected result.
 
 
